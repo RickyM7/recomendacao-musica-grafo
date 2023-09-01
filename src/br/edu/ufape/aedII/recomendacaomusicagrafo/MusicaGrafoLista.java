@@ -43,7 +43,7 @@ public class MusicaGrafoLista implements MusicaGrafo {
     }
 
     @Override
-    public List<Integer> listarAdjacencias(int v) {
+    public List<MusicaVertice> listarAdjacencias(int v) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'listarAdjacencias'");
     }
@@ -51,6 +51,18 @@ public class MusicaGrafoLista implements MusicaGrafo {
     @Override
     public void imprimir() {
     
+    }
+
+    @Override
+    public void removerVertice() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'removerVertice'");
+    }
+
+    @Override
+    public void removerAresta() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'removerAresta'");
     }
     
 }

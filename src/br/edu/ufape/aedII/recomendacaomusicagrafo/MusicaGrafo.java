@@ -11,7 +11,11 @@ public interface MusicaGrafo {
 
 	void imprimirLista();
 
-	List<Integer> listarAdjacencias(int v);
+	List<MusicaVertice> listarAdjacencias(int v);
 
 	void imprimir();
+	
+	void removerVertice();
+
+	void removerAresta();
 }
