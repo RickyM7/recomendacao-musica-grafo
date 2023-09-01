@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MusicaVertice {
+    private int id;
     private String titulo;
     private String artista;
     private String genero;
@@ -50,6 +51,14 @@ public class MusicaVertice {
 
     public void setVizinhos(List<MusicaVertice> vizinhos) {
         this.vizinhos = vizinhos;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
 }

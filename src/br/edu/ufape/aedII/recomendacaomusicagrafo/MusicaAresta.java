@@ -1,6 +1,7 @@
 package br.edu.ufape.aedII.recomendacaomusicagrafo;
 
 public class MusicaAresta {
+    private int id;
     private MusicaVertice musica1;
     private MusicaVertice musica2;
     private double peso;
@@ -35,5 +36,12 @@ public class MusicaAresta {
         this.peso = peso;
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
     
 }
