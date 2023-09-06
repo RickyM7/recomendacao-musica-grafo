@@ -20,4 +20,6 @@ public interface MusicaGrafo {
 	void removerAresta();
 
 	int getNumVertices();
+	
+	MusicaVertice getVerticeById (int id);
 }

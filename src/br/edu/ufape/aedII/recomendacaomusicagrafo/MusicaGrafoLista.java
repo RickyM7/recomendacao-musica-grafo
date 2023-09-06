@@ -69,5 +69,15 @@ public class MusicaGrafoLista implements MusicaGrafo {
     public int getNumVertices() {
         return vertices.size();
     }
+
+    @Override
+    public MusicaVertice getVerticeById(int id) {
+        for (MusicaVertice vertice : vertices) {
+            if (vertice.getId() == id) {
+                return vertice;
+            }
+        }
+        return null;
+    }
     
 }

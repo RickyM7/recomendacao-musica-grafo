@@ -2,16 +2,19 @@ package br.edu.ufape.aedII.recomendacaomusicagrafo;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.util.List;
 import java.util.Scanner;
 
 public class TesteGrafo {
     public static void main(String[] args) throws Exception {
-        String localArquivo = "";
+        String localArquivo = "teste.txt";
         File arquivo = new File(localArquivo);
 
         String titulo, artista, genero;
         MusicaGrafo grafo = new MusicaGrafoLista();
+
+        int v1, v2, vertice_id;
+        double peso;
+        MusicaVertice vertic1, vertic2;
 
         try {
             FileInputStream inputStream = new FileInputStream(arquivo);
@@ -19,12 +22,13 @@ public class TesteGrafo {
             Scanner s = new Scanner(inputStream);
 
             String inicio = s.next().toString();
-            String linha = "";
                         
             if (inicio.equals("#INICIO#")) {
                 while (!s.hasNext("#FIM#")) {
-                    linha = s.nextLine();
                     s.findInLine("VERTICE:");
+                    s.next();
+                    s.findInLine("ID:");
+                    vertice_id = Integer.parseInt(s.next());
                     s.findInLine("TITULO:");
                     titulo = s.next();
                     s.findInLine("ARTISTA:");
@@ -32,8 +36,30 @@ public class TesteGrafo {
                     s.findInLine("GENERO:");
                     genero = s.next();
 
-                    MusicaVertice vertice = new MusicaVertice(titulo, artista, genero);
+                    MusicaVertice vertice = new MusicaVertice(vertice_id, titulo, artista, genero);
                     grafo.adicionarVertice(vertice);
+                }
+            }
+
+            s.nextLine();
+            s.nextLine();
+            String inicio_arestas = s.nextLine();
+
+            if (inicio_arestas.equals("#INICIO#ARESTAS#")) {
+                while (!s.hasNext("#FIM#ARESTAS#")) {
+                    s.findInLine("ARESTA:");
+                    s.next();
+                    s.findInLine("A1_ID:");
+                    v1 = Integer.parseInt(s.next());
+                    s.findInLine("A2_ID:");
+                    v2 = Integer.parseInt(s.next());
+                    s.findInLine("PESO:");
+                    peso = s.nextDouble();
+
+                    vertic1 = grafo.getVerticeById(v1);
+                    vertic2 = grafo.getVerticeById(v2);
+
+                    grafo.adicionarAresta(vertic1, vertic2, peso);
                 }
             }
 
@@ -42,26 +68,8 @@ public class TesteGrafo {
             grafo.imprimirLista();
 
         } catch (Exception e) {
-            System.out.println("Erro:" + e);
+            System.out.println("Erro: " + e);
         }
-
-        // PENSAR NA INSERÇÃO DE ARESTAS
-        MusicaVertice vertice1 = new MusicaVertice("Tudo Pra Amar Você", "Marina Sena", "Pop");
-        MusicaVertice vertice2 = new MusicaVertice("Leave the Door Open", "Bruno Mars", "Pop");
-        MusicaVertice vertice3 = new MusicaVertice("Baby 95", "Liniker", "Pop");
-        MusicaVertice vertice4 = new MusicaVertice("Graveto", "Marília Mendonça", "Sertanejo");
-
-        grafo.adicionarVertice(vertice1);
-        grafo.adicionarVertice(vertice2);
-        grafo.adicionarVertice(vertice3);
-        grafo.adicionarVertice(vertice4);
-
-        grafo.adicionarAresta(vertice3, vertice1, 0.8);
-        grafo.adicionarAresta(vertice1, vertice2, 1.0);
-        grafo.adicionarAresta(vertice2, vertice4, 0.1);
-        grafo.adicionarAresta(vertice2, vertice3, 0.7);
-
-        //grafo.imprimirLista();
 
         /* Teste BuscaLargura:
 

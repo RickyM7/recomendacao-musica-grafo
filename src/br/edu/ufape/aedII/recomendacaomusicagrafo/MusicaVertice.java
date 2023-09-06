@@ -10,10 +10,11 @@ public class MusicaVertice {
     private String genero;
     private List<MusicaVertice> vizinhos;
 
-    public MusicaVertice(String titulo, String artista, String genero) {
+    public MusicaVertice(int id, String titulo, String artista, String genero) {
         this.titulo = titulo;
         this.artista = artista;
         this.genero = genero;
+        this.id = id;
         this.vizinhos = new ArrayList<>();
     }
 
