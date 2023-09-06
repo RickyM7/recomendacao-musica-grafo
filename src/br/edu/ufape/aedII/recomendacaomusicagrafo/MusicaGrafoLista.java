@@ -64,5 +64,10 @@ public class MusicaGrafoLista implements MusicaGrafo {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'removerAresta'");
     }
+
+    @Override
+    public int getNumVertices() {
+        return vertices.size();
+    }
     
 }

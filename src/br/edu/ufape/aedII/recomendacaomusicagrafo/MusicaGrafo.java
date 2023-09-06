@@ -18,4 +18,6 @@ public interface MusicaGrafo {
 	void removerVertice();
 
 	void removerAresta();
+
+	int getNumVertices();
 }

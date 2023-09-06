@@ -2,6 +2,7 @@ package br.edu.ufape.aedII.recomendacaomusicagrafo;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.util.List;
 import java.util.Scanner;
 
 public class TesteGrafo {
@@ -61,6 +62,36 @@ public class TesteGrafo {
         grafo.adicionarAresta(vertice2, vertice3, 0.7);
 
         //grafo.imprimirLista();
+
+        /* Teste BuscaLargura:
+
+        BuscaLarguraMusica recomendacaoBFS = new BuscaLarguraMusica(grafo);
+
+        MusicaVertice verticeInicial = vertice3; //Escolha um vértice de início 
+        int quantidadeRecomendacoes = 0; //Defina o número de recomendações desejadas 
+
+        List<MusicaVertice> recomendacoes = recomendacaoBFS.recomendarMusicas(verticeInicial, quantidadeRecomendacoes);
+
+        System.out.println("Músicas recomendadas:");
+        for (MusicaVertice musica : recomendacoes) {
+            System.out.println("Título: " + musica.getTitulo() + ", Artista: " + musica.getArtista() + ", Gênero: " + musica.getGenero());
+        } 
+        
+        */
+
+        /* Teste BuscaProfundidade:
+        MusicaVertice verticeInicial = vertice3;
+        int quantidadeRecomendacoes = 0;
+
+        // Realizar recomendação de músicas com DFS
+        BuscaProfundidadeMusica recomendacaoDFS = new BuscaProfundidadeMusica(grafo);
+        List<MusicaVertice> recomendacoes = recomendacaoDFS.recomendarMusicas(verticeInicial, quantidadeRecomendacoes);
+
+        System.out.println("Músicas recomendadas:");
+        for (MusicaVertice musica : recomendacoes) {
+            System.out.println("Título: " + musica.getTitulo() + ", Artista: " + musica.getArtista() + ", Gênero: " + musica.getGenero());
+        }
+        */
     }
 }
 
