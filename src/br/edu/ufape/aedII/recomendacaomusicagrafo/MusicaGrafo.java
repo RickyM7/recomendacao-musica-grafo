@@ -23,5 +23,7 @@ public interface MusicaGrafo {
 	
 	MusicaVertice getVerticeById (int id);
 
+	MusicaAresta getArestaByVertices (MusicaVertice v1, MusicaVertice v2);
+
 	List<MusicaVertice> getRankingRecomendacaoMusica(MusicaVertice musica, int topRanking);
 }

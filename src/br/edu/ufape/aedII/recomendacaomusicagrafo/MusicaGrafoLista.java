@@ -115,11 +115,21 @@ public class MusicaGrafoLista implements MusicaGrafo {
 
         for (MusicaVertice vizinho : vertice1.getVizinhos()) {
             if (vizinho.equals(vertice2)) {
-                return 0.0;
-                //return getPesoAresta();
+                MusicaAresta aresta = getArestaByVertices(vertice1, vertice2);
+                return aresta.getPeso();
             }
         }
         return 0.0;
+    }
+
+    @Override
+    public MusicaAresta getArestaByVertices(MusicaVertice v1, MusicaVertice v2) {
+        for (MusicaAresta aresta : arestas) {
+            if (aresta.getMusica1() == v1 && aresta.getMusica2() == v2) {
+                return aresta;
+            }
+        }
+        return null;
     }
     
 }

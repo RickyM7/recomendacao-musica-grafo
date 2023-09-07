@@ -2,6 +2,7 @@ package br.edu.ufape.aedII.recomendacaomusicagrafo;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.util.List;
 import java.util.Scanner;
 
 public class TesteGrafo {
@@ -105,6 +106,22 @@ public class TesteGrafo {
                     break;
                 case 7:
                     // Lógica para ranking de música
+                    System.out.println("Digite o ID da música: ");
+                    int id = scanner.nextInt();
+                    System.out.println("Digite o tamanho do Ranking desejado: ");
+                    int topRanking = scanner.nextInt();
+
+                    MusicaVertice vertice = grafo.getVerticeById(id);
+                    List<MusicaVertice> rankingVertices;
+                    rankingVertices = grafo.getRankingRecomendacaoMusica(vertice, topRanking);
+
+                    System.out.println("TOP " + topRanking + " Músicas Parecidas");
+                    for (MusicaVertice x : rankingVertices) {
+                        System.out.println ((rankingVertices.indexOf(x)+1) + "º ->");
+                        System.out.println("Título: " + x.getTitulo());
+                        System.out.println("Artista: " + x.getArtista());
+                        System.out.println("Gênero: " + x.getGenero());
+                    }
                     break;
                 case 8:
                     // Lógica para encontrar caminho mais curto
