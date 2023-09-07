@@ -23,7 +23,7 @@ public class BuscaLarguraMusica {
             MusicaVertice atual = fila.poll();
             recomendacoes.add(atual);
 
-            List<MusicaVertice> vizinhos = grafo.listarAdjacencias(grafo.getIndiceVertice(atual));
+            List<MusicaVertice> vizinhos = grafo.listarAdjacencias(atual);
             for (MusicaVertice vizinho : vizinhos) {
                 int indiceVizinho = grafo.getIndiceVertice(vizinho);
                 if (!visitado[indiceVizinho]) {

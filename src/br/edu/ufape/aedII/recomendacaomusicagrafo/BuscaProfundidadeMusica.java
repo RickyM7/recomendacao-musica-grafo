@@ -24,7 +24,7 @@ public class BuscaProfundidadeMusica {
                 visitado[grafo.getIndiceVertice(atual)] = true;
                 recomendacoes.add(atual);
 
-                List<MusicaVertice> vizinhos = grafo.listarAdjacencias(grafo.getIndiceVertice(atual));
+                List<MusicaVertice> vizinhos = grafo.listarAdjacencias(atual);
                 for (MusicaVertice vizinho : vizinhos) {
                     pilha.push(vizinho);
                 }

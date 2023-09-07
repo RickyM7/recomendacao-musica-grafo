@@ -93,10 +93,48 @@ public class TesteGrafo {
                     grafo.imprimirLista();
                     break;
                 case 3:
-                    // Lógica para busca em largura
+                    BuscaLarguraMusica recomendacaoBFS = new BuscaLarguraMusica(grafo);
+                    MusicaVertice verticeInicial = null;
+                    int numVertices = grafo.getNumVertices();
+
+                    if (numVertices > 0) {
+                        // Escolha um ID aleatório entre os IDs dos vértices disponíveis
+                        int indiceAleatorio = (int) (Math.random() * numVertices);
+                        indiceAleatorio = Math.max(0, indiceAleatorio);
+
+                        verticeInicial = grafo.getVerticeById(indiceAleatorio);
+                    } else {
+                        System.out.println("O grafo não possui vértices.");
+                    }
+ 
+                    int quantidadeRecomendacoes = 3;
+                    List<MusicaVertice> recomendacoes = recomendacaoBFS.recomendarMusicas(verticeInicial, quantidadeRecomendacoes);
+                    System.out.println("Músicas recomendadas usando BFS:");
+                    for (MusicaVertice musica : recomendacoes) {
+                        System.out.println("Título: " + musica.getTitulo() + ", Artista: " + musica.getArtista() + ", Gênero: " + musica.getGenero());
+                    }
                     break;
                 case 4:
-                    // Lógica para busca em profundidade
+                    BuscaProfundidadeMusica recomendacaoDFS = new BuscaProfundidadeMusica(grafo);
+                    verticeInicial = null;
+                    numVertices = grafo.getNumVertices();
+
+                    if (numVertices > 0) {
+                        // Escolha um ID aleatório entre os IDs dos vértices disponíveis
+                        int indiceAleatorio = (int) (Math.random() * numVertices);
+                        indiceAleatorio = Math.max(0, indiceAleatorio);
+
+                        verticeInicial = grafo.getVerticeById(indiceAleatorio);
+                    } else {
+                        System.out.println("O grafo não possui vértices.");
+                    }
+
+                    quantidadeRecomendacoes = 3;
+                    recomendacoes = recomendacaoDFS.recomendarMusicas(verticeInicial, quantidadeRecomendacoes);
+                    System.out.println("Músicas recomendadas usando DFS:");
+                    for (MusicaVertice musica : recomendacoes) {
+                        System.out.println("Título: " + musica.getTitulo() + ", Artista: " + musica.getArtista() + ", Gênero: " + musica.getGenero());
+                    }
                     break;
                 case 5:
                     // Lógica para remover vértice
@@ -133,36 +171,6 @@ public class TesteGrafo {
                     System.out.println("Opção inválida. Tente novamente.");
             }
         }
-
-        /* Teste BuscaLargura:
-
-        BuscaLarguraMusica recomendacaoBFS = new BuscaLarguraMusica(grafo);
-
-        MusicaVertice verticeInicial = vertice3; //Escolha um vértice de início 
-        int quantidadeRecomendacoes = 0; //Defina o número de recomendações desejadas 
-
-        List<MusicaVertice> recomendacoes = recomendacaoBFS.recomendarMusicas(verticeInicial, quantidadeRecomendacoes);
-
-        System.out.println("Músicas recomendadas:");
-        for (MusicaVertice musica : recomendacoes) {
-            System.out.println("Título: " + musica.getTitulo() + ", Artista: " + musica.getArtista() + ", Gênero: " + musica.getGenero());
-        } 
-        
-        */
-
-        /* Teste BuscaProfundidade:
-        MusicaVertice verticeInicial = vertice3;
-        int quantidadeRecomendacoes = 0;
-
-        // Realizar recomendação de músicas com DFS
-        BuscaProfundidadeMusica recomendacaoDFS = new BuscaProfundidadeMusica(grafo);
-        List<MusicaVertice> recomendacoes = recomendacaoDFS.recomendarMusicas(verticeInicial, quantidadeRecomendacoes);
-
-        System.out.println("Músicas recomendadas:");
-        for (MusicaVertice musica : recomendacoes) {
-            System.out.println("Título: " + musica.getTitulo() + ", Artista: " + musica.getArtista() + ", Gênero: " + musica.getGenero());
-        }
-        */
     }
 }
 

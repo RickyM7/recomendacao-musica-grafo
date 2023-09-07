@@ -45,9 +45,18 @@ public class MusicaGrafoLista implements MusicaGrafo {
     }
 
     @Override
-    public List<MusicaVertice> listarAdjacencias(int v) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'listarAdjacencias'");
+    public List<MusicaVertice> listarAdjacencias(MusicaVertice v) {
+        List<MusicaVertice> adjacencias = new ArrayList<>();
+
+        // Percorra a lista de arestas e adicione os vértices adjacentes a 'v' em 'adjacencias'
+        for (MusicaAresta aresta : arestas) {
+            if (aresta.getMusica1().equals(v)) {
+                adjacencias.add(aresta.getMusica2());
+            } else if (aresta.getMusica2().equals(v)) {
+                adjacencias.add(aresta.getMusica1());
+            }
+        }
+        return adjacencias;
     }
 
     @Override
