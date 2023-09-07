@@ -22,4 +22,6 @@ public interface MusicaGrafo {
 	int getNumVertices();
 	
 	MusicaVertice getVerticeById (int id);
+
+	List<MusicaVertice> getRankingRecomendacaoMusica(MusicaVertice musica, int topRanking);
 }
