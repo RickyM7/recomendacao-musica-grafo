@@ -6,7 +6,8 @@ public class MusicaAresta {
     private MusicaVertice musica2;
     private double peso;
     
-    public MusicaAresta(MusicaVertice musica1, MusicaVertice musica2, double peso) {
+    public MusicaAresta(int aresta_id, MusicaVertice musica1, MusicaVertice musica2, double peso) {
+        this.id = aresta_id;
         this.musica1 = musica1;
         this.musica2 = musica2;
         this.peso = peso;

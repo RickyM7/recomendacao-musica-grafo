@@ -7,7 +7,7 @@ public interface MusicaGrafo {
 
 	int getIndiceVertice(MusicaVertice v);
 
-	void adicionarAresta(MusicaVertice a1, MusicaVertice a2, double peso);
+	void adicionarAresta(int aresta_id, MusicaVertice a1, MusicaVertice a2, double peso);
 
 	void imprimirLista();
 
@@ -20,8 +20,12 @@ public interface MusicaGrafo {
 	void removerAresta();
 
 	int getNumVertices();
+
+	int getNumArestas();
 	
 	MusicaVertice getVerticeById (int id);
+
+	MusicaAresta getArestaById(int id);
 
 	MusicaAresta getArestaByVertices (MusicaVertice v1, MusicaVertice v2);
 

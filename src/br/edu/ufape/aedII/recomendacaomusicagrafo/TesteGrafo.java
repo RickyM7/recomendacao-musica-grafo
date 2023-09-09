@@ -12,12 +12,12 @@ public class TesteGrafo {
 
         String titulo, artista, genero;
 
-        int v1, v2, vertice_id;
+        int v1, v2, vertice_id, aresta_id;
         double peso;
         MusicaVertice vertic1, vertic2;
 
         Scanner scanner = new Scanner(System.in);
-        MusicaGrafo grafo = new MusicaGrafoLista();
+        MusicaGrafoLista grafo = new MusicaGrafoLista();
 
         while (true) {
             System.out.println("Menu:");
@@ -68,18 +68,19 @@ public class TesteGrafo {
                             while (!s.hasNext("#FIM#ARESTAS#")) {
                                 s.findInLine("ARESTA:");
                                 s.next();
+                                s.findInLine("ID:");
+                                aresta_id = Integer.parseInt(s.next().replaceAll("[^0-9]", "")); // Remover caracteres não numéricos
                                 s.findInLine("A1_ID:");
-                                v1 = Integer.parseInt(s.next());
+                                v1 = Integer.parseInt(s.next().replaceAll("[^0-9]", ""));
                                 s.findInLine("A2_ID:");
-                                v2 = Integer.parseInt(s.next());
+                                v2 = Integer.parseInt(s.next().replaceAll("[^0-9]", ""));
                                 s.findInLine("PESO:");
-                                peso = s.nextDouble();
-                            
+                                peso = Double.parseDouble(s.next().replace(',', '.')); // Trocar vírgula por ponto para números decimais
                                 vertic1 = grafo.getVerticeById(v1);
                                 vertic2 = grafo.getVerticeById(v2);
-                            
-                                grafo.adicionarAresta(vertic1, vertic2, peso);
+                                grafo.adicionarAresta(aresta_id, vertic1, vertic2, peso);
                             }
+                            
                         }
                     
                         s.close();
@@ -162,7 +163,17 @@ public class TesteGrafo {
                     }
                     break;
                 case 8:
-                    // Lógica para encontrar caminho mais curto
+                // Lógica para encontrar caminho mais longo (maior peso)
+                ArvoreGeradoraMaxima asm = new ArvoreGeradoraMaxima(); //arvore de espalhamento máximo
+                List<MusicaAresta> arvoreGeradoraMaxima = asm.arvoreGeradoraMaxima(grafo);
+                
+                System.out.println("Árvore Geradora Máxima:");
+                for (MusicaAresta aresta : arvoreGeradoraMaxima) {
+                    System.out.println("Aresta: " + aresta.getId() +
+                                       ", Peso: " + aresta.getPeso() +
+                                       ", Vértices: " + aresta.getMusica1().getTitulo() + " - " + aresta.getMusica2().getTitulo());
+                }
+                
                     break;
                 case 99:
                     scanner.close();
