@@ -52,18 +52,12 @@ public class ArvoreGeradoraMaxima {
             visitadas[i] = false;
         }
 
-        // Seleciona o primeiro vértice como ponto de partida
         // Encontre o menor ID entre os vértices
         int menorId = Integer.MAX_VALUE;
         for (MusicaVertice vertice : grafo.getVertices()) {
             if (vertice.getId() < menorId) {
                 menorId = vertice.getId();
             }
-        }
-
-        // Inicializa os vértices como não visitados
-        for (int i = 0; i < numVertices; i++) {
-            visitadas[i] = false;
         }
 
         // Seleciona o primeiro vértice como ponto de partida
@@ -79,6 +73,11 @@ public class ArvoreGeradoraMaxima {
             int indexV2 = idToIndex.get(arestaMaxPeso.getMusica2().getId());
             visitadas[indexV1] = true;
             visitadas[indexV2] = true;
+
+            // Verifique se a aresta já foi adicionada à árvore geradora máxima
+            if (arvoreGeradoraMaxima.contains(arestaMaxPeso)) {
+                return arvoreGeradoraMaxima;
+            }
 
             // Adiciona a aresta à Árvore Geradora Máxima
             arvoreGeradoraMaxima.add(arestaMaxPeso);

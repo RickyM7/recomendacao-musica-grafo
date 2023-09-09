@@ -51,10 +51,10 @@ public class MusicaGrafoLista implements MusicaGrafo {
     @Override
     public void imprimirLista() {
         for (MusicaVertice vertice : vertices) {
-            System.out.println("{" + "Título: " + vertice.getTitulo() + ", Artist: " + vertice.getArtista() + ", Gênero: " + vertice.getGenero());
-            System.out.print("Vizinhos: ");
+            System.out.println("{ TÍTULO: " + vertice.getTitulo().replaceAll("\\\\", " ") + ", ARTISTA: " + vertice.getArtista().replaceAll("\\\\", " ") + ", GÊNERO: " + vertice.getGenero().replaceAll("\\\\", " "));
+            System.out.print("VIZINHOS: ");
             for (MusicaVertice vizinho : vertice.getVizinhos()) {
-                System.out.print("[" + vizinho.getTitulo() + "] ");
+                System.out.print("[" + vizinho.getTitulo().replaceAll("\\\\", " ") + "] ");
             }
             System.out.println("}");
         }
@@ -81,16 +81,41 @@ public class MusicaGrafoLista implements MusicaGrafo {
     }
 
     @Override
-    public void removerVertice() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'removerVertice'");
+    public void removerVertice(int id) {
+        MusicaVertice verticeParaRemover = null;
+    
+        // Encontre a aresta com o ID especificado
+        for (MusicaVertice vertice : vertices) {
+            if (vertice.getId() == id) {
+                verticeParaRemover = vertice;
+                break;
+            }
+        }
+    
+        // Remova a vertice da lista de arestas
+        if (verticeParaRemover != null) {
+            vertices.remove(verticeParaRemover);
+        }
     }
 
     @Override
-    public void removerAresta() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'removerAresta'");
+    public void removerAresta(int id) {
+        MusicaAresta arestaParaRemover = null;
+    
+        // Encontre a aresta com o ID especificado
+        for (MusicaAresta aresta : arestas) {
+            if (aresta.getId() == id) {
+                arestaParaRemover = aresta;
+                break;
+            }
+        }
+    
+        // Remova a aresta da lista de arestas
+        if (arestaParaRemover != null) {
+            arestas.remove(arestaParaRemover);
+        }
     }
+    
 
     @Override
     public int getNumVertices() {
