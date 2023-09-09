@@ -1,0 +1,25 @@
+#INICIO#
+VERTICE: ID: 1 TITULO: Canção\da\Noite ARTISTA: Maria\Pereira GENERO: Clássico
+VERTICE: ID: 2 TITULO: O\Despertar ARTISTA: Rodrigo\Melo GENERO: Jazz
+VERTICE: ID: 3 TITULO: Luzes\da\Cidade ARTISTA: Camila\Souza GENERO: Eletrônica
+VERTICE: ID: 4 TITULO: Sinfonia\da\Natureza ARTISTA: Lucas\Carvalho GENERO: Ambient
+VERTICE: ID: 5 TITULO: Dança\das\Estrelas ARTISTA: Sofia\Rodrigues GENERO: R&B
+VERTICE: ID: 6 TITULO: Voo\Noturno ARTISTA: André\Oliveira GENERO: Indie\Pop
+VERTICE: ID: 7 TITULO: Noite\Silenciosa ARTISTA: Mateus\Martins GENERO: Folk
+VERTICE: ID: 8 TITULO: Serenata\da\Lua ARTISTA: Laura\Silva GENERO: Balada
+VERTICE: ID: 9 TITULO: Noite\de\Inverno ARTISTA: Gabriel\Ferreira GENERO: Rock
+VERTICE: ID: 10 TITULO: Luar\Radiante ARTISTA: Isabela\Oliveira GENERO: Reggae
+#FIM#
+#INICIO#ARESTAS#
+ARESTA: ID: 1 A1_ID: 2 A2_ID: 3 PESO: 0.9
+ARESTA: ID: 2 A1_ID: 2 A2_ID: 4 PESO: 0.7
+ARESTA: ID: 3 A1_ID: 4 A2_ID: 5 PESO: 0.6
+ARESTA: ID: 4 A1_ID: 5 A2_ID: 6 PESO: 0.5
+ARESTA: ID: 5 A1_ID: 6 A2_ID: 7 PESO: 0.4
+ARESTA: ID: 6 A1_ID: 7 A2_ID: 8 PESO: 0.3
+ARESTA: ID: 7 A1_ID: 8 A2_ID: 9 PESO: 0.2
+ARESTA: ID: 8 A1_ID: 9 A2_ID: 10 PESO: 0.1
+ARESTA: ID: 9 A1_ID: 10 A2_ID: 2 PESO: 0.7
+ARESTA: ID: 10 A1_ID: 2 A2_ID: 1 PESO: 0.7
+ARESTA: ID: 11 A1_ID: 9 A2_ID: 3 PESO: 0.8
+#FIM#ARESTAS#
