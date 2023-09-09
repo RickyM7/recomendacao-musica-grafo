@@ -15,6 +15,22 @@ public class MusicaGrafoLista implements MusicaGrafo {
         this.arestas = new ArrayList<>();
     }
 
+    public List<MusicaVertice> getVertices() {
+        return vertices;
+    }
+
+    public void setVertices(List<MusicaVertice> vertices) {
+        this.vertices = vertices;
+    }
+
+    public List<MusicaAresta> getArestas() {
+        return arestas;
+    }
+
+    public void setArestas(List<MusicaAresta> arestas) {
+        this.arestas = arestas;
+    }
+
     @Override
     public void adicionarVertice(MusicaVertice v) {
         this.vertices.add(v);
@@ -26,8 +42,8 @@ public class MusicaGrafoLista implements MusicaGrafo {
     }
 
     @Override
-    public void adicionarAresta(MusicaVertice a1, MusicaVertice a2, double peso) {
-       MusicaAresta a = new MusicaAresta(a1, a2, peso);
+    public void adicionarAresta(int aresta_id, MusicaVertice a1, MusicaVertice a2, double peso) {
+       MusicaAresta a = new MusicaAresta(aresta_id, a1, a2, peso);
        this.arestas.add(a);
        a1.addVizinho(a2);
     }
@@ -82,10 +98,25 @@ public class MusicaGrafoLista implements MusicaGrafo {
     }
 
     @Override
+    public int getNumArestas() {
+        return arestas.size();
+    }
+
+    @Override
     public MusicaVertice getVerticeById(int id) {
         for (MusicaVertice vertice : vertices) {
             if (vertice.getId() == id) {
                 return vertice;
+            }
+        }
+        return null;
+    }
+
+        @Override
+    public MusicaAresta getArestaById(int id) {
+        for (MusicaAresta aresta : arestas) {
+            if (aresta.getId() == id) {
+                return aresta;
             }
         }
         return null;
@@ -140,5 +171,4 @@ public class MusicaGrafoLista implements MusicaGrafo {
         }
         return null;
     }
-    
 }
