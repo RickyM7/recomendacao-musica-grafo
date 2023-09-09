@@ -2,6 +2,7 @@ package br.edu.ufape.aedII.recomendacaomusicagrafo;
 
 import java.io.File;
 import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
 
 public class TesteGrafo {
@@ -24,6 +25,7 @@ public class TesteGrafo {
             System.out.println("7. Ranking de Música");
             System.out.println("8. Encontrar Caminho Mais Curto (Menor Peso)");
             System.out.println("9. Encontrar Caminho Mais Longo (Maior Peso)");
+            System.out.println("10. Encontrar Menores Distâncias");
             System.out.println("99. Sair");
             System.out.print("Escolha uma opção: ");
 
@@ -149,6 +151,11 @@ public class TesteGrafo {
                     for (MusicaAresta aresta : arvoreGeradoraMaxima) {
                         grafo.imprimirAresta(aresta);
                     }
+                    break;
+                case 10:
+                    // Lógica para encontrar distâncias minimas
+                    Map<MusicaVertice, Double> distancias = MenorDistancia.encontrarCaminhoMaisCurto(grafo, grafo.getVerticeById(1));
+                    MenorDistancia.imprimirDistancias(grafo, distancias);
                     break;
                 case 99:
                     scanner.close();

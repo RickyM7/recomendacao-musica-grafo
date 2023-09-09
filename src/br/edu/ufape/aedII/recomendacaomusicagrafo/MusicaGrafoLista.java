@@ -83,7 +83,7 @@ public class MusicaGrafoLista implements MusicaGrafo {
 
     @Override
     public void imprimirVertice(MusicaVertice vertice) {
-        System.out.print("ID da Vertice: " + vertice.getId());
+        System.out.print("ID da Vertice: " + vertice.getId() + " ");
         imprimirMusica(vertice);
     }
 
