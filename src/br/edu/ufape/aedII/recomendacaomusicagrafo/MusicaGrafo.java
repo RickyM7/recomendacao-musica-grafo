@@ -1,5 +1,6 @@
 package br.edu.ufape.aedII.recomendacaomusicagrafo;
 
+import java.io.File;
 import java.util.List;
 
 public interface MusicaGrafo {
@@ -13,7 +14,11 @@ public interface MusicaGrafo {
 
 	List<MusicaVertice> listarAdjacencias(MusicaVertice v);
 
-	void imprimir();
+	void imprimirVertice(MusicaVertice vertice);
+
+	void imprimirAresta(MusicaAresta aresta);
+	
+	void imprimirMusica(MusicaVertice musica);
 	
 	void removerVertice(int id);
 
@@ -30,4 +35,6 @@ public interface MusicaGrafo {
 	MusicaAresta getArestaByVertices (MusicaVertice v1, MusicaVertice v2);
 
 	List<MusicaVertice> getRankingRecomendacaoMusica(MusicaVertice musica, int topRanking);
+
+	public void carregarArquivo(MusicaGrafoLista grafo, File arquivo);
 }

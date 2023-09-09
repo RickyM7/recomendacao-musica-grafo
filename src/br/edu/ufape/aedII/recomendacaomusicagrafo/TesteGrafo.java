@@ -1,7 +1,6 @@
 package br.edu.ufape.aedII.recomendacaomusicagrafo;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.util.List;
 import java.util.Scanner;
 
@@ -9,12 +8,6 @@ public class TesteGrafo {
     public static void main(String[] args) throws Exception {
         String localArquivo = "teste.txt";
         File arquivo = new File(localArquivo);
-
-        String titulo, artista, genero;
-
-        int v1, v2, vertice_id, aresta_id;
-        double peso;
-        MusicaVertice vertic1, vertic2;
 
         Scanner scanner = new Scanner(System.in);
         MusicaGrafoLista grafo = new MusicaGrafoLista();
@@ -28,7 +21,8 @@ public class TesteGrafo {
             System.out.println("5. Remover Vértice");
             System.out.println("6. Remover Aresta");
             System.out.println("7. Ranking de Música");
-            System.out.println("8. Encontrar Caminho Mais Longo (Maior Peso)");
+            System.out.println("8. Encontrar Caminho Mais Curto (Menor Peso)");
+            System.out.println("9. Encontrar Caminho Mais Longo (Maior Peso)");
             System.out.println("99. Sair");
             System.out.print("Escolha uma opção: ");
 
@@ -36,58 +30,7 @@ public class TesteGrafo {
 
             switch (escolha) {
                 case 1:
-                    try {
-                        FileInputStream inputStream = new FileInputStream(arquivo);
-
-                        Scanner s = new Scanner(inputStream);
-                        String inicio = s.next().toString();
-
-                        if (inicio.equals("#INICIO#")) {
-                            while (!s.hasNext("#FIM#")) {
-                                s.findInLine("VERTICE:");
-                                s.next();
-                                s.findInLine("ID:");
-                                vertice_id = Integer.parseInt(s.next());
-                                s.findInLine("TITULO:");
-                                titulo = s.next();
-                                s.findInLine("ARTISTA:");
-                                artista = s.next();
-                                s.findInLine("GENERO:");
-                                genero = s.next();
-                            
-                                MusicaVertice vertice = new MusicaVertice(vertice_id, titulo, artista, genero);
-                                grafo.adicionarVertice(vertice);
-                            }
-                        }
-                    
-                        s.nextLine();
-                        s.nextLine();
-                        String inicio_arestas = s.nextLine();
-                    
-                        if (inicio_arestas.equals("#INICIO#ARESTAS#")) {
-                            while (!s.hasNext("#FIM#ARESTAS#")) {
-                                s.findInLine("ARESTA:");
-                                s.next();
-                                s.findInLine("ID:");
-                                aresta_id = Integer.parseInt(s.next().replaceAll("[^0-9]", "")); // Remover caracteres não numéricos
-                                s.findInLine("A1_ID:");
-                                v1 = Integer.parseInt(s.next().replaceAll("[^0-9]", ""));
-                                s.findInLine("A2_ID:");
-                                v2 = Integer.parseInt(s.next().replaceAll("[^0-9]", ""));
-                                s.findInLine("PESO:");
-                                peso = Double.parseDouble(s.next().replace(',', '.')); // Trocar vírgula por ponto para números decimais
-                                vertic1 = grafo.getVerticeById(v1);
-                                vertic2 = grafo.getVerticeById(v2);
-                                grafo.adicionarAresta(aresta_id, vertic1, vertic2, peso);
-                            }
-                            
-                        }
-                    
-                        s.close();
-                        inputStream.close();
-                    } catch (Exception e) {
-                        System.out.println("Erro ao carregar: " + e);
-                    }
+                    grafo.carregarArquivo(grafo, arquivo);
                     break;
                 case 2:
                     // Lógica para imprimir vértices
@@ -107,34 +50,35 @@ public class TesteGrafo {
                     } else {
                         System.out.println("O grafo não possui vértices.");
                     }
- 
+
                     int quantidadeRecomendacoes = 3;
-                    List<MusicaVertice> recomendacoes = recomendacaoBFS.recomendarMusicas(verticeInicial, quantidadeRecomendacoes);
+                    List<MusicaVertice> recomendacoes = recomendacaoBFS.recomendarMusicas(verticeInicial,
+                            quantidadeRecomendacoes);
                     System.out.println("Músicas recomendadas usando BFS:");
                     for (MusicaVertice musica : recomendacoes) {
-                        System.out.println("TÍTULO: " + musica.getTitulo().replaceAll("\\\\", " ") + ", ARTISTA: " + musica.getArtista().replaceAll("\\\\", " ") + ", GÊNERO: " + musica.getGenero().replaceAll("\\\\", " "));
+                        grafo.imprimirMusica(musica);
                     }
                     break;
                 case 4:
                     BuscaProfundidadeMusica recomendacaoDFS = new BuscaProfundidadeMusica(grafo);
                     verticeInicial = null;
                     numVertices = grafo.getNumVertices();
-                    
+
                     if (numVertices > 0) {
                         // Escolha um ID aleatório entre os IDs dos vértices disponíveis
                         int indiceAleatorio = (int) (Math.random() * numVertices);
                         indiceAleatorio = Math.max(0, indiceAleatorio);
-                        
+
                         verticeInicial = grafo.getVerticeById(indiceAleatorio);
                     } else {
                         System.out.println("O grafo não possui vértices.");
                     }
-                    
+
                     quantidadeRecomendacoes = 3;
                     recomendacoes = recomendacaoDFS.recomendarMusicas(verticeInicial, quantidadeRecomendacoes);
                     System.out.println("Músicas recomendadas usando DFS:");
                     for (MusicaVertice musica : recomendacoes) {
-                        System.out.println("TÍTULO: " + musica.getTitulo().replaceAll("\\\\", " ") + ", ARTISTA: " + musica.getArtista().replaceAll("\\\\", " ") + ", GÊNERO: " + musica.getGenero().replaceAll("\\\\", " "));
+                        grafo.imprimirMusica(musica);
                     }
                     break;
                 case 5:
@@ -152,7 +96,7 @@ public class TesteGrafo {
                         }
                     }
                     break;
-                    case 6:
+                case 6:
                     // Lógica para remover aresta
                     System.out.println("Digite o ID da aresta: ");
                     int idA = scanner.nextInt();
@@ -180,24 +124,30 @@ public class TesteGrafo {
 
                     System.out.println("TOP " + topRanking + " Músicas Parecidas");
                     for (MusicaVertice x : rankingVertices) {
-                        System.out.println ((rankingVertices.indexOf(x)+1) + "º ->");
-                        System.out.println("Título: " + x.getTitulo().replaceAll("\\\\", " "));
-                        System.out.println("Artista: " + x.getArtista().replaceAll("\\\\", " "));
-                        System.out.println("Gênero: " + x.getGenero().replaceAll("\\\\", " "));
+                        System.out.println((rankingVertices.indexOf(x) + 1) + "º ->");
+                        grafo.imprimirMusica(x);
                     }
                     break;
                 case 8:
-                // Lógica para encontrar caminho mais longo (maior peso)
-                ArvoreGeradoraMaxima asm = new ArvoreGeradoraMaxima(); //arvore de espalhamento máximo
-                List<MusicaAresta> arvoreGeradoraMaxima = asm.arvoreGeradoraMaxima(grafo);
-                
-                System.out.println("Árvore Geradora Máxima:");
-                for (MusicaAresta aresta : arvoreGeradoraMaxima) {
-                    System.out.println("ID da Aresta: " + aresta.getId() +
-                                       ", Peso: " + aresta.getPeso() +
-                                       ", Vértices: " + aresta.getMusica1().getTitulo().replaceAll("\\\\", " ") + " - " + aresta.getMusica2().getTitulo().replaceAll("\\\\", " "));
-                }
-                
+                    // Lógica para encontrar o caminho mais curto (menor peso)
+                    ArvoreGeradoraMinima agmin = new ArvoreGeradoraMinima();
+                    List<MusicaAresta> arvoreGeradoraMinima = agmin.arvoreGeradoraMinima(grafo);
+
+                    System.out.println("Árvore Geradora Mínima:");
+                    for (MusicaAresta aresta : arvoreGeradoraMinima) {
+                        grafo.imprimirAresta(aresta);
+                    }
+
+                    break;
+                case 9:
+                    // Lógica para encontrar o caminho mais longo (maior peso)
+                    ArvoreGeradoraMaxima agmax = new ArvoreGeradoraMaxima();
+                    List<MusicaAresta> arvoreGeradoraMaxima = agmax.arvoreGeradoraMaxima(grafo);
+
+                    System.out.println("Árvore Geradora Máxima:");
+                    for (MusicaAresta aresta : arvoreGeradoraMaxima) {
+                        grafo.imprimirAresta(aresta);
+                    }
                     break;
                 case 99:
                     scanner.close();
@@ -208,4 +158,3 @@ public class TesteGrafo {
         }
     }
 }
-

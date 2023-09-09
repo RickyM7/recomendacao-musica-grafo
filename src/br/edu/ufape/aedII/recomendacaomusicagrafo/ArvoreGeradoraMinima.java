@@ -4,14 +4,14 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class ArvoreGeradoraMaxima {
+public class ArvoreGeradoraMinima {
 
-    //implementação do algoritmo de Kruskal, porém invertido para listar por maiores pesos
-    public List<MusicaAresta> arvoreGeradoraMaxima(MusicaGrafoLista grafo) {
+    //implementação do algoritmo de Kruskal
+    public List<MusicaAresta> arvoreGeradoraMinima(MusicaGrafoLista grafo) {
         List<MusicaAresta> arestasOrdenadas = new ArrayList<>(grafo.getArestas());
-        Collections.sort(arestasOrdenadas, (a1, a2) -> Double.compare(a2.getPeso(), a1.getPeso())); // Invertido a2.getPeso() e a1.getPeso()
+        Collections.sort(arestasOrdenadas, (a1, a2) -> Double.compare(a1.getPeso(), a2.getPeso()));
         
-        List<MusicaAresta> arvoreMaxima = new ArrayList<>();
+        List<MusicaAresta> arvoreMinima = new ArrayList<>();
         AcharUniao acharUniao = new AcharUniao(grafo.getNumVertices());
 
         for (MusicaAresta aresta : arestasOrdenadas) {
@@ -22,12 +22,12 @@ public class ArvoreGeradoraMaxima {
             int raizV2 = acharUniao.encontrar(v2.getId());
 
             if (raizV1 != raizV2) {
-                arvoreMaxima.add(aresta);
+                arvoreMinima.add(aresta);
                 acharUniao.unir(raizV1, raizV2);
             }
         }
 
-        return arvoreMaxima;
+        return arvoreMinima;
     }
 
     private static class AcharUniao {
