@@ -28,7 +28,7 @@ public class TesteGrafo {
             System.out.println("5. Remover Vértice");
             System.out.println("6. Remover Aresta");
             System.out.println("7. Ranking de Música");
-            System.out.println("8. Encontrar Caminho Mais Curto");
+            System.out.println("8. Encontrar Caminho Mais Longo (Maior Peso)");
             System.out.println("99. Sair");
             System.out.print("Escolha uma opção: ");
 
@@ -112,36 +112,60 @@ public class TesteGrafo {
                     List<MusicaVertice> recomendacoes = recomendacaoBFS.recomendarMusicas(verticeInicial, quantidadeRecomendacoes);
                     System.out.println("Músicas recomendadas usando BFS:");
                     for (MusicaVertice musica : recomendacoes) {
-                        System.out.println("Título: " + musica.getTitulo() + ", Artista: " + musica.getArtista() + ", Gênero: " + musica.getGenero());
+                        System.out.println("TÍTULO: " + musica.getTitulo().replaceAll("\\\\", " ") + ", ARTISTA: " + musica.getArtista().replaceAll("\\\\", " ") + ", GÊNERO: " + musica.getGenero().replaceAll("\\\\", " "));
                     }
                     break;
                 case 4:
                     BuscaProfundidadeMusica recomendacaoDFS = new BuscaProfundidadeMusica(grafo);
                     verticeInicial = null;
                     numVertices = grafo.getNumVertices();
-
+                    
                     if (numVertices > 0) {
                         // Escolha um ID aleatório entre os IDs dos vértices disponíveis
                         int indiceAleatorio = (int) (Math.random() * numVertices);
                         indiceAleatorio = Math.max(0, indiceAleatorio);
-
+                        
                         verticeInicial = grafo.getVerticeById(indiceAleatorio);
                     } else {
                         System.out.println("O grafo não possui vértices.");
                     }
-
+                    
                     quantidadeRecomendacoes = 3;
                     recomendacoes = recomendacaoDFS.recomendarMusicas(verticeInicial, quantidadeRecomendacoes);
                     System.out.println("Músicas recomendadas usando DFS:");
                     for (MusicaVertice musica : recomendacoes) {
-                        System.out.println("Título: " + musica.getTitulo() + ", Artista: " + musica.getArtista() + ", Gênero: " + musica.getGenero());
+                        System.out.println("TÍTULO: " + musica.getTitulo().replaceAll("\\\\", " ") + ", ARTISTA: " + musica.getArtista().replaceAll("\\\\", " ") + ", GÊNERO: " + musica.getGenero().replaceAll("\\\\", " "));
                     }
                     break;
                 case 5:
                     // Lógica para remover vértice
+                    System.out.println("Digite o ID do vertice: ");
+                    int idV = scanner.nextInt();
+                    if (grafo.getVerticeById(idV) == null) {
+                        System.out.println("Vertice (ID:" + idV + ") não existe!");
+                    } else {
+                        grafo.removerVertice(idV);
+                        if (grafo.getVerticeById(idV) == null) {
+                            System.out.println("Vertice (ID:" + idV + ") removido com sucesso!");
+                        } else {
+                            System.out.println("Falha ao remover Vertice (ID: " + idV + ")!");
+                        }
+                    }
                     break;
-                case 6:
+                    case 6:
                     // Lógica para remover aresta
+                    System.out.println("Digite o ID da aresta: ");
+                    int idA = scanner.nextInt();
+                    if (grafo.getArestaById(idA) == null) {
+                        System.out.println("Aresta (ID:" + idA + ") não existe!");
+                    } else {
+                        grafo.removerAresta(idA);
+                        if (grafo.getArestaById(idA) == null) {
+                            System.out.println("Aresta (ID:" + idA + ") removida com sucesso!");
+                        } else {
+                            System.out.println("Falha ao remover Aresta (ID: " + idA + ")!");
+                        }
+                    }
                     break;
                 case 7:
                     // Lógica para ranking de música
@@ -157,9 +181,9 @@ public class TesteGrafo {
                     System.out.println("TOP " + topRanking + " Músicas Parecidas");
                     for (MusicaVertice x : rankingVertices) {
                         System.out.println ((rankingVertices.indexOf(x)+1) + "º ->");
-                        System.out.println("Título: " + x.getTitulo());
-                        System.out.println("Artista: " + x.getArtista());
-                        System.out.println("Gênero: " + x.getGenero());
+                        System.out.println("Título: " + x.getTitulo().replaceAll("\\\\", " "));
+                        System.out.println("Artista: " + x.getArtista().replaceAll("\\\\", " "));
+                        System.out.println("Gênero: " + x.getGenero().replaceAll("\\\\", " "));
                     }
                     break;
                 case 8:
@@ -169,9 +193,9 @@ public class TesteGrafo {
                 
                 System.out.println("Árvore Geradora Máxima:");
                 for (MusicaAresta aresta : arvoreGeradoraMaxima) {
-                    System.out.println("Aresta: " + aresta.getId() +
+                    System.out.println("ID da Aresta: " + aresta.getId() +
                                        ", Peso: " + aresta.getPeso() +
-                                       ", Vértices: " + aresta.getMusica1().getTitulo() + " - " + aresta.getMusica2().getTitulo());
+                                       ", Vértices: " + aresta.getMusica1().getTitulo().replaceAll("\\\\", " ") + " - " + aresta.getMusica2().getTitulo().replaceAll("\\\\", " "));
                 }
                 
                     break;

@@ -15,9 +15,9 @@ public interface MusicaGrafo {
 
 	void imprimir();
 	
-	void removerVertice();
+	void removerVertice(int id);
 
-	void removerAresta();
+	void removerAresta(int id);
 
 	int getNumVertices();
 
