@@ -6,7 +6,8 @@ import java.util.Scanner;
 
 public class TesteGrafo {
     public static void main(String[] args) throws Exception {
-        String localArquivo = "teste.txt";
+        // String localArquivo = "teste.txt";
+        String localArquivo = "grafoteste.txt";
         File arquivo = new File(localArquivo);
 
         Scanner scanner = new Scanner(System.in);

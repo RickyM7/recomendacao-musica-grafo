@@ -91,8 +91,8 @@ public class MusicaGrafoLista implements MusicaGrafo {
     public void imprimirAresta(MusicaAresta aresta) {
         System.out.println("ID da Aresta: " + aresta.getId() +
                 ", Peso: " + aresta.getPeso() +
-                ", Vértices: " + aresta.getMusica1().getTitulo().replaceAll("\\\\", " ") + " - "
-                + aresta.getMusica2().getTitulo().replaceAll("\\\\", " "));
+                ", Vértices: " + aresta.getMusica1().getTitulo().replaceAll("\\\\", " ") + " (ID:" + aresta.getMusica1().getId() + ")" + " - "
+                + aresta.getMusica2().getTitulo().replaceAll("\\\\", " ") + " (ID:" + aresta.getMusica2().getId() + ")");
     }
 
     @Override
