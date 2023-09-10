@@ -52,16 +52,16 @@ public class MusicaGrafoLista implements MusicaGrafo {
     }
 
     @Override
-    public void imprimirLista() {
+    public void imprimirVertices() {
         for (MusicaVertice vertice : vertices) {
-            System.out.println("{ TÍTULO: " + vertice.getTitulo().replaceAll("\\\\", " ") + ", ARTISTA: "
-                    + vertice.getArtista().replaceAll("\\\\", " ") + ", GÊNERO: "
-                    + vertice.getGenero().replaceAll("\\\\", " "));
-            System.out.print("VIZINHOS: ");
-            for (MusicaVertice vizinho : vertice.getVizinhos()) {
-                System.out.print("[" + vizinho.getTitulo().replaceAll("\\\\", " ") + "] ");
-            }
-            System.out.println("}");
+            imprimirVertice(vertice);
+        }
+    }
+
+    @Override
+    public void imprimirArestas() {
+        for (MusicaAresta aresta : arestas) {
+            imprimirAresta(aresta);
         }
     }
 
@@ -105,20 +105,28 @@ public class MusicaGrafoLista implements MusicaGrafo {
     @Override
     public void removerVertice(int id) {
         MusicaVertice verticeParaRemover = null;
-
-        // Encontre a aresta com o ID especificado
+    
+        // Encontre o vértice com o ID especificado
         for (MusicaVertice vertice : vertices) {
             if (vertice.getId() == id) {
                 verticeParaRemover = vertice;
                 break;
             }
         }
-
-        // Remova a vertice da lista de arestas
+    
+        // Remova o vértice da lista de vértices
         if (verticeParaRemover != null) {
             vertices.remove(verticeParaRemover);
         }
+    
+        // Remova as arestas conectadas a esse vértice
+        for (MusicaAresta aresta : arestas) {
+            if (aresta.getMusica1().equals(verticeParaRemover) || aresta.getMusica2().equals(verticeParaRemover)) {
+                arestas.remove(aresta);
+            }
+        }
     }
+    
 
     @Override
     public void removerAresta(int id) {
@@ -246,11 +254,13 @@ public class MusicaGrafoLista implements MusicaGrafo {
             String inicio_arestas = s.nextLine();
     
             if (inicio_arestas.equals("#INICIO#ARESTAS#")) {
+                int aresta_id = 1; // Inicialize o ID da primeira aresta (evita o erro de indice 2 repetido)
                 while (!s.hasNext("#FIM#ARESTAS#")) {
                     s.findInLine("ARESTA:");
                     s.next();
-                    s.findInLine("ID:");
-                    int aresta_id = Integer.parseInt(s.next().replaceAll("[^0-9]", ""));
+                    // s.findInLine("ID:");
+                    // int aresta_id = Integer.parseInt(s.next().replaceAll("[^0-9]", ""));
+                    System.out.println(aresta_id    + "sfajsfljsdflçsdf");
                     s.findInLine("A1_ID:");
                     int v1 = Integer.parseInt(s.next().replaceAll("[^0-9]", ""));
                     s.findInLine("A2_ID:");
@@ -261,6 +271,7 @@ public class MusicaGrafoLista implements MusicaGrafo {
                     MusicaVertice vertic1 = grafo.getVerticeById(v1);
                     MusicaVertice vertic2 = grafo.getVerticeById(v2);
                     grafo.adicionarAresta(aresta_id, vertic1, vertic2, peso);
+                    aresta_id++;
                 }
             }
     

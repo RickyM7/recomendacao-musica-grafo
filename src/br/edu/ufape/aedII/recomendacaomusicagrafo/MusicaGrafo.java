@@ -10,7 +10,8 @@ public interface MusicaGrafo {
 
 	void adicionarAresta(int aresta_id, MusicaVertice a1, MusicaVertice a2, double peso);
 
-	void imprimirLista();
+	void imprimirVertices();
+	void imprimirArestas();
 
 	List<MusicaVertice> listarAdjacencias(MusicaVertice v);
 
