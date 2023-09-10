@@ -18,14 +18,15 @@ public class TesteGrafo {
             System.out.println("Menu:");
             System.out.println("1. Carregar Vértices e Arestas");
             System.out.println("2. Imprimir Vértices");
-            System.out.println("3. Busca em Largura");
-            System.out.println("4. Busca em Profundidade");
-            System.out.println("5. Remover Vértice");
-            System.out.println("6. Remover Aresta");
-            System.out.println("7. Ranking de Música");
-            System.out.println("8. Encontrar Caminho Mais Curto (Menor Peso)");
-            System.out.println("9. Encontrar Caminho Mais Longo (Maior Peso)");
-            System.out.println("10. Encontrar Menores Distâncias");
+            System.out.println("3. Imprimir Arestas");
+            System.out.println("4. Busca em Largura");
+            System.out.println("5. Busca em Profundidade");
+            System.out.println("6. Remover Vértice");
+            System.out.println("7. Remover Aresta");
+            System.out.println("8. Ranking de Música");
+            System.out.println("9. Encontrar Caminho Mais Curto (Menor Peso)");
+            System.out.println("10. Encontrar Caminho Mais Longo (Maior Peso)");
+            System.out.println("11. Encontrar Menores Distâncias");
             System.out.println("99. Sair");
             System.out.print("Escolha uma opção: ");
 
@@ -37,9 +38,13 @@ public class TesteGrafo {
                     break;
                 case 2:
                     // Lógica para imprimir vértices
-                    grafo.imprimirLista();
+                    grafo.imprimirVertices();
                     break;
                 case 3:
+                    // Lógica para imprimir vértices
+                    grafo.imprimirArestas();
+                    break;
+                case 4:
                     BuscaLarguraMusica recomendacaoBFS = new BuscaLarguraMusica(grafo);
                     MusicaVertice verticeInicial = null;
                     int numVertices = grafo.getNumVertices();
@@ -62,7 +67,7 @@ public class TesteGrafo {
                         grafo.imprimirMusica(musica);
                     }
                     break;
-                case 4:
+                case 5:
                     BuscaProfundidadeMusica recomendacaoDFS = new BuscaProfundidadeMusica(grafo);
                     verticeInicial = null;
                     numVertices = grafo.getNumVertices();
@@ -84,7 +89,7 @@ public class TesteGrafo {
                         grafo.imprimirMusica(musica);
                     }
                     break;
-                case 5:
+                case 6:
                     // Lógica para remover vértice
                     System.out.println("Digite o ID do vertice: ");
                     int idV = scanner.nextInt();
@@ -99,7 +104,7 @@ public class TesteGrafo {
                         }
                     }
                     break;
-                case 6:
+                case 7:
                     // Lógica para remover aresta
                     System.out.println("Digite o ID da aresta: ");
                     int idA = scanner.nextInt();
@@ -114,7 +119,7 @@ public class TesteGrafo {
                         }
                     }
                     break;
-                case 7:
+                case 8:
                     // Lógica para ranking de música
                     System.out.println("Digite o ID da música: ");
                     int id = scanner.nextInt();
@@ -131,7 +136,7 @@ public class TesteGrafo {
                         grafo.imprimirMusica(x);
                     }
                     break;
-                case 8:
+                case 9:
                     // Lógica para encontrar o caminho mais curto (menor peso)
                     ArvoreGeradoraMinima agmin = new ArvoreGeradoraMinima();
                     List<MusicaAresta> arvoreGeradoraMinima = agmin.arvoreGeradoraMinima(grafo);
@@ -142,7 +147,7 @@ public class TesteGrafo {
                     }
 
                     break;
-                case 9:
+                case 10:
                     // Lógica para encontrar o caminho mais longo (maior peso)
                     ArvoreGeradoraMaxima agmax = new ArvoreGeradoraMaxima();
                     List<MusicaAresta> arvoreGeradoraMaxima = agmax.arvoreGeradoraMaxima(grafo);
@@ -152,7 +157,7 @@ public class TesteGrafo {
                         grafo.imprimirAresta(aresta);
                     }
                     break;
-                case 10:
+                case 11:
                     // Lógica para encontrar distâncias minimas
                     Map<MusicaVertice, Double> distancias = MenorDistancia.encontrarCaminhoMaisCurto(grafo, grafo.getVerticeById(1));
                     MenorDistancia.imprimirDistancias(grafo, distancias);
