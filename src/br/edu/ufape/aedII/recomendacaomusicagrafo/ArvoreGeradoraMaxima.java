@@ -12,11 +12,15 @@ public class ArvoreGeradoraMaxima {
         Collections.sort(arestasOrdenadas, (a1, a2) -> Double.compare(a2.getPeso(), a1.getPeso())); // Invertido a2.getPeso() e a1.getPeso()
         
         List<MusicaAresta> arvoreMaxima = new ArrayList<>();
-        AcharUniao acharUniao = new AcharUniao(grafo.getNumVertices());
+        AcharUniao acharUniao = new AcharUniao(grafo.getNumVertices()*2);
 
         for (MusicaAresta aresta : arestasOrdenadas) {
+
             MusicaVertice v1 = aresta.getMusica1();
             MusicaVertice v2 = aresta.getMusica2();
+            if (v1 == null || v2 == null) {
+                return arvoreMaxima;
+            }
 
             int raizV1 = acharUniao.encontrar(v1.getId());
             int raizV2 = acharUniao.encontrar(v2.getId());

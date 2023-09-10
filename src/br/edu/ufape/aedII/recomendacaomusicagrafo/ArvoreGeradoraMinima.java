@@ -12,7 +12,7 @@ public class ArvoreGeradoraMinima {
         Collections.sort(arestasOrdenadas, (a1, a2) -> Double.compare(a1.getPeso(), a2.getPeso()));
         
         List<MusicaAresta> arvoreMinima = new ArrayList<>();
-        AcharUniao acharUniao = new AcharUniao(grafo.getNumVertices());
+        AcharUniao acharUniao = new AcharUniao(grafo.getNumVertices()*2); // vezes 2 pra corrigir o erro de remoção
 
         for (MusicaAresta aresta : arestasOrdenadas) {
             MusicaVertice v1 = aresta.getMusica1();

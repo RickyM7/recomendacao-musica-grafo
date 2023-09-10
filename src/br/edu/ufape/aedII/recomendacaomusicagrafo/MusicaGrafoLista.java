@@ -91,8 +91,10 @@ public class MusicaGrafoLista implements MusicaGrafo {
     public void imprimirAresta(MusicaAresta aresta) {
         System.out.println("ID da Aresta: " + aresta.getId() +
                 ", Peso: " + aresta.getPeso() +
-                ", Vértices: " + aresta.getMusica1().getTitulo().replaceAll("\\\\", " ") + " (ID:" + aresta.getMusica1().getId() + ")" + " - "
-                + aresta.getMusica2().getTitulo().replaceAll("\\\\", " ") + " (ID:" + aresta.getMusica2().getId() + ")");
+                ", Vértices: " + aresta.getMusica1().getTitulo().replaceAll("\\\\", " ") + " (ID:"
+                + aresta.getMusica1().getId() + ")" + " - "
+                + aresta.getMusica2().getTitulo().replaceAll("\\\\", " ") + " (ID:" + aresta.getMusica2().getId()
+                + ")");
     }
 
     @Override
@@ -105,7 +107,7 @@ public class MusicaGrafoLista implements MusicaGrafo {
     @Override
     public void removerVertice(int id) {
         MusicaVertice verticeParaRemover = null;
-    
+
         // Encontre o vértice com o ID especificado
         for (MusicaVertice vertice : vertices) {
             if (vertice.getId() == id) {
@@ -113,20 +115,23 @@ public class MusicaGrafoLista implements MusicaGrafo {
                 break;
             }
         }
-    
-        // Remova o vértice da lista de vértices
-        if (verticeParaRemover != null) {
-            vertices.remove(verticeParaRemover);
-        }
-    
-        // Remova as arestas conectadas a esse vértice
+
+        // Crie uma lista temporária para armazenar as arestas a serem removidas
+        List<MusicaAresta> arestasParaRemover = new ArrayList<>();
+
+        // Identifique as arestas conectadas ao vértice a ser removido
         for (MusicaAresta aresta : arestas) {
             if (aresta.getMusica1().equals(verticeParaRemover) || aresta.getMusica2().equals(verticeParaRemover)) {
-                arestas.remove(aresta);
+                arestasParaRemover.add(aresta);
             }
         }
+
+        // Remova as arestas identificadas da lista principal de arestas
+        arestas.removeAll(arestasParaRemover);
+
+        // Finalmente, remova o vértice da lista de vértices
+        vertices.remove(verticeParaRemover);
     }
-    
 
     @Override
     public void removerAresta(int id) {
@@ -224,13 +229,13 @@ public class MusicaGrafoLista implements MusicaGrafo {
         }
         return null;
     }
-    
+
     public void carregarArquivo(MusicaGrafoLista grafo, File arquivo) {
         try {
             FileInputStream inputStream = new FileInputStream(arquivo);
             Scanner s = new Scanner(inputStream);
             String inicio = s.next().toString();
-    
+
             if (inicio.equals("#INICIO#")) {
                 while (!s.hasNext("#FIM#")) {
                     s.findInLine("VERTICE:");
@@ -243,16 +248,16 @@ public class MusicaGrafoLista implements MusicaGrafo {
                     String artista = s.next();
                     s.findInLine("GENERO:");
                     String genero = s.next();
-    
+
                     MusicaVertice vertice = new MusicaVertice(vertice_id, titulo, artista, genero);
                     grafo.adicionarVertice(vertice);
                 }
             }
-    
+
             s.nextLine();
             s.nextLine();
             String inicio_arestas = s.nextLine();
-    
+
             if (inicio_arestas.equals("#INICIO#ARESTAS#")) {
                 int aresta_id = 1; // Inicialize o ID da primeira aresta (evita o erro de indice 2 repetido)
                 while (!s.hasNext("#FIM#ARESTAS#")) {
@@ -266,14 +271,14 @@ public class MusicaGrafoLista implements MusicaGrafo {
                     int v2 = Integer.parseInt(s.next().replaceAll("[^0-9]", ""));
                     s.findInLine("PESO:");
                     double peso = Double.parseDouble(s.next().replace(',', '.'));
-    
+
                     MusicaVertice vertic1 = grafo.getVerticeById(v1);
                     MusicaVertice vertic2 = grafo.getVerticeById(v2);
                     grafo.adicionarAresta(aresta_id, vertic1, vertic2, peso);
                     aresta_id++;
                 }
             }
-    
+
             s.close();
             inputStream.close();
         } catch (Exception e) {

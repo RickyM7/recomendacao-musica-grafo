@@ -159,8 +159,14 @@ public class TesteGrafo {
                     break;
                 case 11:
                     // Lógica para encontrar distâncias minimas
-                    Map<MusicaVertice, Double> distancias = MenorDistancia.encontrarCaminhoMaisCurto(grafo, grafo.getVerticeById(1));
-                    MenorDistancia.imprimirDistancias(grafo, distancias);
+                    List<MusicaVertice> vertices = grafo.getVertices();
+                    if (!vertices.isEmpty()) {
+                        MusicaVertice verticeOrigem = vertices.get(0);
+                        Map<MusicaVertice, Double> distancias = MenorDistancia.encontrarCaminhoMaisCurto(grafo, verticeOrigem);
+                        MenorDistancia.imprimirDistancias(grafo, distancias);
+                    } else {
+                        System.out.println("O grafo não possui vértices.");
+                    }
                     break;
                 case 99:
                     scanner.close();
