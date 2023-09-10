@@ -260,7 +260,6 @@ public class MusicaGrafoLista implements MusicaGrafo {
                     s.next();
                     // s.findInLine("ID:");
                     // int aresta_id = Integer.parseInt(s.next().replaceAll("[^0-9]", ""));
-                    System.out.println(aresta_id    + "sfajsfljsdflçsdf");
                     s.findInLine("A1_ID:");
                     int v1 = Integer.parseInt(s.next().replaceAll("[^0-9]", ""));
                     s.findInLine("A2_ID:");
