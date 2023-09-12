@@ -7,8 +7,8 @@ import java.util.Scanner;
 
 public class TesteGrafo {
     public static void main(String[] args) throws Exception {
-        // String localArquivo = "teste.txt";
-        String localArquivo = "grafoteste.txt";
+        String localArquivo = "teste.txt";
+        // String localArquivo = "grafoteste.txt";
         File arquivo = new File(localArquivo);
 
         Scanner scanner = new Scanner(System.in);
@@ -26,7 +26,7 @@ public class TesteGrafo {
             System.out.println("8. Ranking de Música");
             System.out.println("9. Encontrar Caminho Mais Curto (Menor Peso)");
             System.out.println("10. Encontrar Caminho Mais Longo (Maior Peso)");
-            System.out.println("11. Encontrar Menores Distâncias");
+            System.out.println("11. Encontrar Maiores Distâncias");
             System.out.println("99. Sair");
             System.out.print("Escolha uma opção: ");
 
@@ -91,7 +91,7 @@ public class TesteGrafo {
                     break;
                 case 6:
                     // Lógica para remover vértice
-                    System.out.println("Digite o ID do vertice: ");
+                    System.out.print("Digite o ID do vertice: ");
                     int idV = scanner.nextInt();
                     if (grafo.getVerticeById(idV) == null) {
                         System.out.println("Vertice (ID:" + idV + ") não existe!");
@@ -106,7 +106,7 @@ public class TesteGrafo {
                     break;
                 case 7:
                     // Lógica para remover aresta
-                    System.out.println("Digite o ID da aresta: ");
+                    System.out.print("Digite o ID da aresta: ");
                     int idA = scanner.nextInt();
                     if (grafo.getArestaById(idA) == null) {
                         System.out.println("Aresta (ID:" + idA + ") não existe!");
@@ -121,18 +121,18 @@ public class TesteGrafo {
                     break;
                 case 8:
                     // Lógica para ranking de música
-                    System.out.println("Digite o ID da música: ");
+                    System.out.print("Digite o ID da música: ");
                     int id = scanner.nextInt();
-                    System.out.println("Digite o tamanho do Ranking desejado: ");
+                    System.out.print("Digite o tamanho do Ranking desejado: ");
                     int topRanking = scanner.nextInt();
 
                     MusicaVertice vertice = grafo.getVerticeById(id);
                     List<MusicaVertice> rankingVertices;
                     rankingVertices = grafo.getRankingRecomendacaoMusica(vertice, topRanking);
 
-                    System.out.println("TOP " + topRanking + " Músicas Parecidas");
+                    System.out.println("TOP " + topRanking + " Músicas Parecidas com " + vertice.getTitulo().replace('\\', ' '));
                     for (MusicaVertice x : rankingVertices) {
-                        System.out.println((rankingVertices.indexOf(x) + 1) + "º ->");
+                        System.out.printf("%dº -> ", (rankingVertices.indexOf(x) + 1));
                         grafo.imprimirMusica(x);
                     }
                     break;
@@ -161,9 +161,11 @@ public class TesteGrafo {
                     // Lógica para encontrar distâncias minimas
                     List<MusicaVertice> vertices = grafo.getVertices();
                     if (!vertices.isEmpty()) {
-                        MusicaVertice verticeOrigem = vertices.get(0);
-                        Map<MusicaVertice, Double> distancias = MenorDistancia.encontrarCaminhoMaisCurto(grafo, verticeOrigem);
-                        MenorDistancia.imprimirDistancias(grafo, distancias);
+                        System.out.print("Digite o ID do vertice de origem: ");
+                        int idorigem = scanner.nextInt() -1; //-1 pois os ids começam em 1
+                        MusicaVertice verticeOrigem = vertices.get(idorigem);
+                        Map<MusicaVertice, Double> distancias = MaiorDistancia.encontrarCaminhoMaisLongo(grafo, verticeOrigem);
+                        MaiorDistancia.imprimirDistancias(grafo, distancias, idorigem);
                     } else {
                         System.out.println("O grafo não possui vértices.");
                     }
