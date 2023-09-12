@@ -3,7 +3,7 @@ package br.edu.ufape.aedII.recomendacaomusicagrafo;
 import java.util.*;
 
 public class MaiorDistancia {
-    // Algoritmo para encontrar as maiores distâncias em um grafo ponderado
+    // Algoritmo de Dijkstra para encontrar as maiores distâncias
     public static Map<MusicaVertice, Double> encontrarCaminhoMaisLongo(MusicaGrafoLista grafo, MusicaVertice origem) {
         Map<MusicaVertice, Double> distancias = new HashMap<>();
         
