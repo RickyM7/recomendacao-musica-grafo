@@ -39,6 +39,20 @@ public class MaiorDistancia {
         return distancias;
     }
 
+    private static MusicaVertice obterVerticeNaoVisitadoComMaiorDistancia(MusicaGrafoLista grafo, Map<MusicaVertice, Double> distancias, boolean[] visitados) {
+        double maiorDistancia = Double.NEGATIVE_INFINITY;
+        MusicaVertice verticeComMaiorDistancia = null;
+        
+        for (MusicaVertice vertice : grafo.getVertices()) {
+            if (!visitados[grafo.getIndiceVertice(vertice)] && distancias.get(vertice) > maiorDistancia) {
+                maiorDistancia = distancias.get(vertice);
+                verticeComMaiorDistancia = vertice;
+            }
+        }
+        
+        return verticeComMaiorDistancia;
+    }
+    
     public static void imprimirDistancias(MusicaGrafoLista grafo, Map<MusicaVertice, Double> distancias, int idorigem) {
         // Converta o mapa em uma lista para classificar as distâncias
         List<Map.Entry<MusicaVertice, Double>> listaDistancias = new ArrayList<>(distancias.entrySet());
@@ -58,19 +72,5 @@ public class MaiorDistancia {
             }
             grafo.imprimirVertice(vertice);
         }
-    }
-    
-    private static MusicaVertice obterVerticeNaoVisitadoComMaiorDistancia(MusicaGrafoLista grafo, Map<MusicaVertice, Double> distancias, boolean[] visitados) {
-        double maiorDistancia = Double.NEGATIVE_INFINITY;
-        MusicaVertice verticeComMaiorDistancia = null;
-        
-        for (MusicaVertice vertice : grafo.getVertices()) {
-            if (!visitados[grafo.getIndiceVertice(vertice)] && distancias.get(vertice) > maiorDistancia) {
-                maiorDistancia = distancias.get(vertice);
-                verticeComMaiorDistancia = vertice;
-            }
-        }
-        
-        return verticeComMaiorDistancia;
     }
 }
