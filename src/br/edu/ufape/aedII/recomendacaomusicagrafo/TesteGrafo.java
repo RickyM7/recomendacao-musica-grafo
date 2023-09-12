@@ -7,8 +7,8 @@ import java.util.Scanner;
 
 public class TesteGrafo {
     public static void main(String[] args) throws Exception {
-        String localArquivo = "teste.txt";
-        // String localArquivo = "grafoteste.txt";
+        // String localArquivo = "teste.txt";
+        String localArquivo = "grafoteste.txt";
         File arquivo = new File(localArquivo);
 
         Scanner scanner = new Scanner(System.in);
@@ -163,6 +163,10 @@ public class TesteGrafo {
                     if (!vertices.isEmpty()) {
                         System.out.print("Digite o ID do vertice de origem: ");
                         int idorigem = scanner.nextInt() -1; //-1 pois os ids começam em 1
+                        if (idorigem < 0 || idorigem >= vertices.size()) {
+                            System.out.println("Indice inválido!");
+                            break;
+                        }
                         MusicaVertice verticeOrigem = vertices.get(idorigem);
                         Map<MusicaVertice, Double> distancias = MaiorDistancia.encontrarCaminhoMaisLongo(grafo, verticeOrigem);
                         MaiorDistancia.imprimirDistancias(grafo, distancias, idorigem);

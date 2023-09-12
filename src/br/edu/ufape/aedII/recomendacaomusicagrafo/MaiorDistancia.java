@@ -27,10 +27,13 @@ public class MaiorDistancia {
             for (MusicaVertice vizinho : grafo.listarAdjacencias(atual)) {
                 if (!visitados[grafo.getIndiceVertice(vizinho)]) {
                     double pesoAresta = grafo.getPeso(atual, vizinho);
-                    double distanciaNova = distancias.get(atual) + pesoAresta;
                     
-                    if (distanciaNova > distancias.get(vizinho)) {
-                        distancias.put(vizinho, distanciaNova);
+                    if (pesoAresta > 0) {
+                        double distanciaNova = distancias.get(atual) + pesoAresta;
+                        
+                        if (distanciaNova > distancias.get(vizinho)) {
+                            distancias.put(vizinho, distanciaNova);
+                        }
                     }
                 }
             }
