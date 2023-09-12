@@ -53,10 +53,15 @@ public class TesteGrafo {
                         // Escolha um ID aleatório entre os IDs dos vértices disponíveis
                         int indiceAleatorio = (int) (Math.random() * numVertices);
                         indiceAleatorio = Math.max(0, indiceAleatorio);
-
+                        
                         verticeInicial = grafo.getVerticeById(indiceAleatorio);
+                        if (verticeInicial == null) {
+                            System.out.println("Vértice inválido");
+                            break;
+                        }
                     } else {
                         System.out.println("O grafo não possui vértices.");
+                        break;
                     }
 
                     int quantidadeRecomendacoes = 3;
@@ -78,8 +83,13 @@ public class TesteGrafo {
                         indiceAleatorio = Math.max(0, indiceAleatorio);
 
                         verticeInicial = grafo.getVerticeById(indiceAleatorio);
+                        if (verticeInicial == null) {
+                            System.out.println("Vértice inválido");
+                            break;
+                        }
                     } else {
                         System.out.println("O grafo não possui vértices.");
+                        break;
                     }
 
                     quantidadeRecomendacoes = 3;
@@ -127,6 +137,10 @@ public class TesteGrafo {
                     int topRanking = scanner.nextInt();
 
                     MusicaVertice vertice = grafo.getVerticeById(id);
+                    if (vertice == null) {
+                        System.out.println("Essa música não existe!");
+                        break;
+                    }
                     List<MusicaVertice> rankingVertices;
                     rankingVertices = grafo.getRankingRecomendacaoMusica(vertice, topRanking);
 
